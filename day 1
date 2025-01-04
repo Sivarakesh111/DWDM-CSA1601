@@ -1,0 +1,20 @@
+# Grouped data
+intervals <- c("1-5", "5-15", "15-20", "20-50", "50-80", "80-110")
+frequency <- c(200, 450, 300, 1500, 700, 44)
+
+# Compute median
+cumulative_frequency <- cumsum(frequency)
+N <- sum(frequency)
+median_class_index <- which(cumulative_frequency >= N / 2)[1]
+
+L <- c(1, 5, 15, 20, 50, 80)[median_class_index] # Lower boundary of median class
+F <- ifelse(median_class_index > 1, cumulative_frequency[median_class_index - 1], 0) # Cumulative frequency before median class
+f_m <- frequency[median_class_index] # Frequency of median class
+h <- c(4, 10, 5, 30, 30, 30)[median_class_index] # Width of median class
+
+median <- L + ((N / 2 - F) / f_m) * h
+print(median)
+
+
+Output
+[1] 32.94
